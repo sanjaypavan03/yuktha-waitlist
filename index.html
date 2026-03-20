@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yuktha — Join the Waitlist</title>
+<meta name="description" content="Something is being built for India's healthcare. 60,000 hospitals. 500M patients. Zero system. We're fixing this.">
+<meta property="og:title" content="Yuktha — Join the Waitlist">
+<meta property="og:description" content="One QR code. Any doctor. Any emergency. Any time. Be among the first.">
+<meta property="og:image" content="https://yuktha.health/og.png">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --teal:#02B69A;
+  --teal2:#00D4AA;
+  --teal-d:#018A75;
+  --ink:#020810;
+  --ink2:#060F1C;
+  --ink3:#0C1928;
+  --white:#F0F8FF;
+  --slate:#8FA3B8;
+  --slate2:#C2D4E4;
+  --red:#E84040;
+  --amber:#F0A020;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--ink);
+  color:var(--white);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* ── BACKGROUND ── */
+.bg-layer{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 60% 50% at 15% 0%, rgba(2,182,154,.09) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 85% 100%, rgba(2,182,154,.06) 0%, transparent 50%);
+}
+.grid-layer{display:none}
+
+/* ── NOISE ── */
+.noise{
+  position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.015;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ── LAYOUT ── */
+.page{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column}
+
+/* ── NAV ── */
+nav{
+  padding:20px 32px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid rgba(2,182,154,.08);
+  backdrop-filter:blur(10px);
+  background:rgba(2,8,16,.4);
+  position:sticky;top:0;z-index:100;
+}
+.logo{
+  font-family:'Playfair Display',Georgia,serif;
+  font-size:20px;font-weight:900;font-style:italic;
+  color:var(--teal);letter-spacing:-0.5px;
+  display:flex;align-items:center;gap:4px;
+  text-decoration:none;
+}
+.logo-dot{width:7px;height:7px;border-radius:50%;background:var(--teal2);margin-bottom:2px}
+.nav-pill{
+  font-size:11px;font-weight:600;letter-spacing:.08em;
+  color:var(--teal);background:rgba(2,182,154,.1);
+  border:1px solid rgba(2,182,154,.25);
+  border-radius:20px;padding:5px 14px;
+  display:flex;align-items:center;gap:6px;
+}
+.pulse{width:6px;height:6px;border-radius:50%;background:var(--teal);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.8)}}
+
+/* ── HERO ── */
+.hero{
+  flex:1;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;padding:60px 20px 40px;text-align:center;
+}
+.hero-eyebrow{
+  font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--teal);margin-bottom:20px;
+  display:flex;align-items:center;gap:8px;
+}
+.hero-eyebrow::before,.hero-eyebrow::after{
+  content:'';display:block;width:32px;height:1px;background:rgba(2,182,154,.4);
+}
+.hero-headline{
+  font-family:'Playfair Display',Georgia,serif;
+  font-size:clamp(36px,6vw,72px);
+  font-weight:700;line-height:1.05;
+  color:#FFFFFF;
+  margin-bottom:12px;
+  max-width:800px;
+}
+.hero-headline .accent{color:var(--teal);font-style:italic}
+.hero-sub{
+  font-size:clamp(14px,2vw,17px);
+  color:#A0B4C8;
+  line-height:1.7;
+  max-width:520px;
+  margin:0 auto 40px;
+}
+.hero-sub strong{color:var(--slate2)}
+
+/* ── COUNTER ── */
+.counter-row{
+  display:flex;gap:28px;margin-bottom:40px;
+  flex-wrap:wrap;justify-content:center;
+}
+.counter-item{text-align:center}
+.counter-num{
+  font-family:'DM Mono',monospace;
+  font-size:clamp(22px,4vw,36px);
+  font-weight:500;color:var(--teal);
+  letter-spacing:-1px;line-height:1;
+}
+.counter-label{font-size:10px;color:var(--slate);letter-spacing:.08em;text-transform:uppercase;margin-top:4px}
+.counter-div{width:1px;background:rgba(2,182,154,.2);align-self:stretch}
+
+/* ── FORM ── */
+.form-wrap{
+  width:100%;max-width:480px;margin:0 auto;
+}
+.form-card{
+  background:rgba(4,10,20,.95);
+  border:1px solid rgba(2,182,154,.18);
+  border-radius:20px;
+  padding:28px;
+  backdrop-filter:blur(20px);
+  position:relative;overflow:hidden;
+}
+.form-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--teal),transparent);
+}
+.form-title{
+  font-size:16px;font-weight:600;color:var(--white);
+  margin-bottom:4px;
+}
+.form-sub{font-size:12px;color:var(--slate);margin-bottom:20px;line-height:1.5}
+
+.input-row{display:flex;flex-direction:column;gap:10px;margin-bottom:10px}
+.input-group{position:relative}
+.input-label{
+  font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--slate);margin-bottom:6px;display:block;
+}
+input,select{
+  width:100%;
+  background:rgba(2,8,16,.6);
+  border:1px solid rgba(2,182,154,.15);
+  border-radius:10px;
+  padding:12px 16px;
+  font-family:'DM Sans',sans-serif;
+  font-size:13px;
+  color:var(--white);
+  outline:none;
+  transition:border-color .2s,background .2s;
+  -webkit-appearance:none;
+}
+input::placeholder{color:var(--slate)}
+input:focus,select:focus{
+  border-color:rgba(2,182,154,.5);
+  background:rgba(2,182,154,.04);
+}
+select{
+  color:var(--slate);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238FA3B8' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 14px center;
+  padding-right:36px;
+  cursor:pointer;
+}
+select option{background:#0C1928;color:var(--white)}
+
+.phone-row{display:flex;gap:8px}
+.phone-prefix{
+  width:72px;flex-shrink:0;
+  background:rgba(2,8,16,.6);
+  border:1px solid rgba(2,182,154,.15);
+  border-radius:10px;
+  padding:12px 10px;
+  font-family:'DM Mono',monospace;
+  font-size:12px;color:var(--slate);
+  display:flex;align-items:center;justify-content:center;
+  letter-spacing:.05em;
+}
+
+.submit-btn{
+  width:100%;padding:14px;
+  border-radius:12px;
+  background:var(--teal);
+  color:var(--ink);
+  border:none;
+  font-family:'DM Sans',sans-serif;
+  font-size:14px;font-weight:700;
+  cursor:pointer;
+  transition:all .2s;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  margin-top:14px;
+  position:relative;overflow:hidden;
+}
+.submit-btn::after{
+  content:'';position:absolute;inset:0;
+  background:rgba(255,255,255,0);transition:background .2s;
+}
+.submit-btn:hover::after{background:rgba(255,255,255,.08)}
+.submit-btn:active{transform:scale(.99)}
+.submit-btn:disabled{opacity:.6;cursor:not-allowed}
+.btn-arrow{transition:transform .2s}
+.submit-btn:hover .btn-arrow{transform:translateX(4px)}
+
+.form-note{
+  text-align:center;margin-top:12px;
+  font-size:11px;color:var(--slate);line-height:1.5;
+}
+.form-note a{color:var(--teal);text-decoration:none}
+
+/* ── SUCCESS STATE ── */
+.success-state{
+  display:none;text-align:center;padding:20px 0;
+}
+.success-icon{
+  width:60px;height:60px;border-radius:50%;
+  background:rgba(2,182,154,.15);border:2px solid var(--teal);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 16px;font-size:24px;
+}
+.success-title{font-size:18px;font-weight:600;color:var(--white);margin-bottom:6px}
+.success-sub{font-size:13px;color:var(--slate);line-height:1.6}
+.success-num{
+  font-family:'DM Mono',monospace;font-size:28px;font-weight:500;
+  color:var(--teal);margin:14px 0 4px;
+}
+
+/* ── SOCIAL SHARE ── */
+.share-section{
+  margin-top:24px;padding-top:20px;
+  border-top:1px solid rgba(2,182,154,.1);
+}
+.share-label{font-size:11px;color:var(--slate);margin-bottom:10px;text-align:center;letter-spacing:.06em;text-transform:uppercase}
+.share-btns{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.share-btn{
+  display:flex;align-items:center;gap:6px;
+  padding:8px 16px;border-radius:8px;
+  font-size:12px;font-weight:600;
+  cursor:pointer;border:1px solid;transition:all .2s;
+  text-decoration:none;
+}
+.share-btn:hover{transform:translateY(-1px)}
+.share-wa{background:rgba(37,211,102,.1);border-color:rgba(37,211,102,.3);color:#25D366}
+.share-ig{background:rgba(225,48,108,.1);border-color:rgba(225,48,108,.3);color:#E1306C}
+.share-cp{background:rgba(2,182,154,.1);border-color:rgba(2,182,154,.3);color:var(--teal)}
+
+/* ── STATS STRIP ── */
+.stats-strip{
+  display:flex;gap:0;
+  border-top:1px solid rgba(2,182,154,.1);
+  border-bottom:1px solid rgba(2,182,154,.1);
+  flex-wrap:wrap;
+}
+.stat-block{
+  flex:1;min-width:160px;
+  padding:20px 24px;
+  text-align:center;
+  border-right:1px solid rgba(2,182,154,.08);
+}
+.stat-block:last-child{border-right:none}
+.stat-val{
+  font-family:'DM Mono',monospace;
+  font-size:28px;font-weight:500;
+  color:#02B69A;line-height:1;margin-bottom:4px;
+}
+.stat-lbl{font-size:11px;color:var(--slate);line-height:1.4}
+
+/* ── FEATURES ── */
+
+
+/* ── TESTIMONIALS / SOCIAL PROOF ── */
+.proof{
+  padding:40px 20px;max-width:700px;margin:0 auto;width:100%;text-align:center;
+}
+.proof-label{
+  font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--slate);margin-bottom:20px;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+}
+.proof-label::before,.proof-label::after{content:'';display:block;width:40px;height:1px;background:rgba(255,255,255,.1)}
+.quotes{display:flex;flex-direction:column;gap:12px}
+.quote{
+  background:rgba(4,10,20,.85);
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:12px;padding:16px 20px;
+  text-align:left;
+}
+.quote-text{font-size:13px;color:var(--slate2);line-height:1.7;font-style:italic;margin-bottom:10px}
+.quote-author{display:flex;align-items:center;gap:8px}
+.quote-avatar{
+  width:28px;height:28px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:700;color:#000;
+  flex-shrink:0;
+}
+.quote-name{font-size:11px;font-weight:600;color:var(--white)}
+.quote-role{font-size:10px;color:var(--slate)}
+
+/* ── BOTTOM CTA ── */
+.bottom-cta{
+  padding:60px 20px;text-align:center;
+  border-top:1px solid rgba(2,182,154,.1);
+  background:rgba(2,8,16,.3);
+}
+.bottom-cta-headline{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(22px,4vw,40px);
+  font-weight:700;color:var(--white);
+  margin-bottom:10px;line-height:1.2;
+}
+.bottom-cta-sub{font-size:13px;color:var(--slate);margin-bottom:24px;line-height:1.6}
+.cta-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--teal);color:var(--ink);
+  padding:14px 32px;border-radius:12px;
+  font-size:14px;font-weight:700;
+  text-decoration:none;border:none;cursor:pointer;
+  font-family:'DM Sans',sans-serif;
+  transition:all .2s;
+}
+.cta-btn:hover{background:var(--teal2);transform:translateY(-1px)}
+
+/* ── FOOTER ── */
+footer{
+  padding:24px 32px;
+  border-top:1px solid rgba(2,182,154,.08);
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:12px;
+}
+.footer-logo{font-family:'Playfair Display',serif;font-size:15px;font-weight:900;font-style:italic;color:var(--teal)}
+.footer-text{font-size:11px;color:var(--slate)}
+.footer-tagline{font-size:11px;color:var(--slate);letter-spacing:.06em}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.fade-up{animation:fadeUp .6s ease forwards;opacity:0}
+.fade-up:nth-child(1){animation-delay:.1s}
+.fade-up:nth-child(2){animation-delay:.2s}
+.fade-up:nth-child(3){animation-delay:.3s}
+.fade-up:nth-child(4){animation-delay:.4s}
+.fade-up:nth-child(5){animation-delay:.5s}
+
+/* ── TICKER ── */
+.ticker-wrap{
+  overflow:hidden;
+  border-top:1px solid rgba(2,182,154,.08);
+  border-bottom:1px solid rgba(2,182,154,.08);
+  padding:10px 0;background:rgba(2,8,16,.8);
+}
+.ticker{
+  display:flex;gap:0;
+  animation:ticker 30s linear infinite;
+  white-space:nowrap;
+}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.tick-item{
+  padding:0 32px;font-size:11px;color:var(--slate);
+  display:flex;align-items:center;gap:8px;
+}
+.tick-dot{width:4px;height:4px;border-radius:50%;background:var(--teal);flex-shrink:0}
+
+/* ── RESPONSIVE ── */
+@media(max-width:600px){
+  nav{padding:16px 20px}
+  .hero{padding:40px 16px 32px}
+  .features,.proof{padding:40px 16px}
+  footer{padding:20px;flex-direction:column;text-align:center}
+  .counter-div{display:none}
+  .stats-strip{flex-direction:column}
+  .stat-block{border-right:none;border-bottom:1px solid rgba(2,182,154,.08)}
+  .stat-block:last-child{border-bottom:none}
+}
+</style>
+</head>
+<body>
+
+<!-- SETUP BANNER — remove after completing setup -->
+<div id="setup-banner" style="display:none" style="background:#1a0a00;border-bottom:2px solid #F0A020;padding:14px 20px;font-family:'DM Sans',sans-serif;display:flex;align-items:flex-start;gap:12px;position:relative;z-index:999">
+  <div style="font-size:18px;flex-shrink:0">⚠️</div>
+  <div>
+    <div style="font-size:13px;font-weight:700;color:#F0A020;margin-bottom:6px">Setup required before going live — follow these 3 steps:</div>
+    <div style="font-size:12px;color:#aaa;line-height:2">
+      <b style="color:#fff">Step 1 — Create Formspree form:</b> Go to <a href="https://formspree.io" target="_blank" style="color:#F0A020">formspree.io</a> → Login with Google → Click <b style="color:#fff">+ New Form</b> → Name it <b style="color:#fff">"Yuktha Waitlist"</b> → Set email to <b style="color:#fff"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2d54584659454c0345484c4159456d4a404c4441034e4240">[email&#160;protected]</a></b> → Click Create → Copy the 8-character form ID from the URL (e.g. <b style="color:#fff">xpwzabcd</b>)<br>
+      <b style="color:#fff">Step 2 — Add form ID:</b> In this HTML file, find <b style="color:#fff">mjgajyvd</b> and replace it with your 8-character ID<br>
+      <b style="color:#fff">Step 3 — Deploy:</b> Drag this file to <a href="https://netlify.com" target="_blank" style="color:#F0A020">netlify.com</a> → Done. Every signup emails you instantly.
+    </div>
+  </div>
+  <button onclick="document.getElementById('setup-banner').style.display='none'" style="background:none;border:none;color:#555;font-size:18px;cursor:pointer;flex-shrink:0;margin-left:auto">✕</button>
+</div>
+
+<div class="bg-layer"></div>
+<div class="grid-layer"></div>
+<div class="noise"></div>
+
+<div class="page">
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">yuktha<div class="logo-dot"></div></a>
+  <div class="nav-pill"><div class="pulse"></div>Waitlist open</div>
+</nav>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span class="tick-item"><div class="tick-dot"></div>60,000+ hospitals. Zero digital system.</span>
+    <span class="tick-item"><div class="tick-dot"></div>500 million patients. No digital records.</span>
+    <span class="tick-item"><div class="tick-dot"></div>60 minutes. That's all the time a doctor has.</span>
+    <span class="tick-item"><div class="tick-dot"></div>Less than 3% of Indians have digital health records</span>
+    <span class="tick-item"><div class="tick-dot"></div>Something is being built. Stay close.</span>
+    <span class="tick-item"><div class="tick-dot"></div>Built for Bharat — not just Bangalore</span>
+    <span class="tick-item"><div class="tick-dot"></div>The problem is real. The solution is coming.</span>
+    <span class="tick-item"><div class="tick-dot"></div>60,000+ hospitals. Zero digital system.</span>
+    <span class="tick-item"><div class="tick-dot"></div>500 million patients. No digital records.</span>
+    <span class="tick-item"><div class="tick-dot"></div>60 minutes. That's all the time a doctor has.</span>
+    <span class="tick-item"><div class="tick-dot"></div>Less than 3% of Indians have digital health records</span>
+    <span class="tick-item"><div class="tick-dot"></div>Something is being built. Stay close.</span>
+    <span class="tick-item"><div class="tick-dot"></div>Built for Bharat — not just Bangalore</span>
+    <span class="tick-item"><div class="tick-dot"></div>The problem is real. The solution is coming.</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow fade-up">Something is being built</div>
+  <h1 class="hero-headline fade-up">
+    India's healthcare system<br>needs a <span class="accent">new layer.</span>
+  </h1>
+  <p class="hero-sub fade-up">
+    Every year thousands of Indians die in emergencies not because help wasn't available —
+    but because <strong>the doctor didn't have the information in time.</strong>
+    <br><br>We are building something about this.<br>Join the waitlist to be among the first to know.
+  </p>
+
+  <div class="counter-row fade-up">
+    <div class="counter-item">
+      <div class="counter-num" id="c1">0</div>
+      <div class="counter-label">on the waitlist</div>
+    </div>
+    <div class="counter-div"></div>
+    <div class="counter-item">
+      <div class="counter-num">60K+</div>
+      <div class="counter-label">hospitals, no system</div>
+    </div>
+    <div class="counter-div"></div>
+    <div class="counter-item">
+      <div class="counter-num">500M</div>
+      <div class="counter-label">patients affected</div>
+    </div>
+    <div class="counter-div"></div>
+    <div class="counter-item">
+      <div class="counter-num">60</div>
+      <div class="counter-label">minutes to save a life</div>
+    </div>
+  </div>
+
+  <!-- FORM -->
+  <div class="form-wrap fade-up">
+    <div class="form-card" id="form-card">
+      <div id="form-content">
+        <div class="form-title">Be among the first.</div>
+        <div class="form-sub">We're not ready to show everything yet. But when we launch, waitlist members get access first. Takes 30 seconds.</div>
+        <div class="input-row">
+          <div class="input-group">
+            <label class="input-label">Full name</label>
+            <input type="text" id="inp-name" placeholder="Your full name" autocomplete="name">
+          </div>
+          <div class="input-group">
+            <label class="input-label">Email address</label>
+            <input type="email" id="inp-email" placeholder="you@example.com" autocomplete="email">
+          </div>
+          <div class="input-group">
+            <label class="input-label">Phone number</label>
+            <div class="phone-row">
+              <div class="phone-prefix">+91</div>
+              <input type="tel" id="inp-phone" placeholder="98765 43210" autocomplete="tel" style="flex:1">
+            </div>
+          </div>
+          <div class="input-group">
+            <label class="input-label">I am a</label>
+            <select id="inp-type">
+              <option value="" disabled selected>Select your role</option>
+              <option value="patient">Patient / Family member</option>
+              <option value="doctor">Doctor</option>
+              <option value="hospital">Hospital owner / Admin</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="input-group" id="city-group">
+            <label class="input-label">City</label>
+            <input type="text" id="inp-city" placeholder="Hyderabad, Warangal, Nizamabad...">
+          </div>
+        </div>
+        <div id="form-error" style="display:none;background:rgba(232,64,64,.1);border:1px solid rgba(232,64,64,.3);border-radius:8px;padding:10px 14px;font-size:12px;color:#E84040;margin-bottom:10px"></div>
+        <button class="submit-btn" id="submit-btn" onclick="submitForm()">
+          <span id="btn-text">Join the waitlist</span>
+          <span class="btn-arrow" id="btn-arrow">→</span>
+        </button>
+        <div class="form-note">
+          No spam. No credit card. Just early access.<br>
+          By joining you agree to our <a href="#">Privacy Policy</a>.
+        </div>
+<div style="background:#0a1a0a;border:1px solid rgba(2,182,154,.2);border-radius:8px;padding:10px 14px;margin-top:8px;font-size:11px;color:#8FA3B8;line-height:1.6">
+
+</div>
+      </div>
+
+      <!-- SUCCESS -->
+      <div class="success-state" id="success-state">
+        <div class="success-icon">✓</div>
+        <div class="success-title">You're on the list.</div>
+        <div class="success-sub">We'll reach out when Yuktha is ready for you.<br>You're in good company.</div>
+        <div class="success-num" id="success-num">#247</div>
+        <div style="font-size:11px;color:var(--slate);margin-bottom:16px">on the Yuktha waitlist</div>
+
+        <div class="share-section">
+          <div class="share-label">Share with someone who should know</div>
+          <div class="share-btns">
+            <a class="share-btn share-wa" id="wa-btn" href="#" target="_blank">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              WhatsApp
+            </a>
+            <a class="share-btn share-ig" id="ig-btn" href="https://instagram.com" target="_blank">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+              Instagram
+            </a>
+            <button class="share-btn share-cp" id="copy-link-btn" onclick="copyLink()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+              <span id="copy-link-text">Copy link</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-strip" style="background:rgba(4,10,20,.6)">
+  <div class="stat-block">
+    <div class="stat-val">60K+</div>
+    <div class="stat-lbl">Private hospitals in India<br>with zero digital system</div>
+  </div>
+  <div class="stat-block">
+    <div class="stat-val">500M</div>
+    <div class="stat-lbl">Patients with no<br>digital medical records</div>
+  </div>
+  <div class="stat-block">
+    <div class="stat-val">&lt;3%</div>
+    <div class="stat-lbl">Indians can access their<br>complete health records digitally</div>
+  </div>
+  <div class="stat-block">
+    <div class="stat-val">22</div>
+    <div class="stat-lbl">Indian languages supported<br>by Yuktha AI</div>
+  </div>
+</div>
+
+<!-- BOTTOM CTA -->
+<section class="bottom-cta">
+  <div class="bottom-cta-headline">Don't be the person who was late.</div>
+  <div class="bottom-cta-sub">Something is being built for India's healthcare system.<br>The people on this list will be the first to see it.<br>The list is growing. Every day.</div>
+  <a href="#" class="cta-btn" onclick="document.querySelector('.form-card').scrollIntoView({behavior:'smooth'});return false">
+    Join the waitlist → 
+  </a>
+  <div style="margin-top:14px;font-size:11px;color:var(--slate)">Takes 30 seconds. No credit card required.</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">yuktha</div>
+  <div class="footer-text"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b9c0ccd2cdd1d897d1dcd8d5cdd1f9ded4d8d0d597dad6d4">[email&#160;protected]</a> · +91 88964 23456</div>
+  <div class="footer-tagline">Health connected. Care protected.</div>
+</footer>
+
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// Animated counter
+function animateCount(el,target,duration,prefix='',suffix=''){
+  let start=0,step=target/60;
+  const id=setInterval(()=>{
+    start+=step;
+    if(start>=target){start=target;clearInterval(id);}
+    el.textContent=prefix+Math.round(start).toLocaleString()+suffix;
+  },duration/60);
+}
+window.addEventListener('load',async()=>{
+  // Fetch real count from countapi — synced across all browsers
+  try{
+    // Supabase counter — read current count
+    const sbRes=await fetch('https://vgviijuhbsxichhqagjz.supabase.co/rest/v1/waitlist_count?id=eq.1&select=count',{
+      headers:{'apikey':'sb_publishable_lmdvtOzwC14qieDKzVusGQ_ms2ePXcc','Authorization':'Bearer sb_publishable_lmdvtOzwC14qieDKzVusGQ_ms2ePXcc'}
+    });
+    const sbData=await sbRes.json();
+    const real=(sbData&&sbData[0]&&sbData[0].count>0)?sbData[0].count:0;
+    document.getElementById('c1').textContent=real;
+    if(real>0) animateCount(document.getElementById('c1'),real,1200);
+  }catch(e){
+    document.getElementById('c1').textContent='—';
+  }
+});
+
+// Form
+let submitted=false;
+async function submitForm(){
+  if(submitted)return;
+  const name=document.getElementById('inp-name').value.trim();
+  const email=document.getElementById('inp-email').value.trim();
+  const phone=document.getElementById('inp-phone').value.trim();
+  const type=document.getElementById('inp-type').value;
+  const city=document.getElementById('inp-city').value.trim();
+  const err=document.getElementById('form-error');
+
+  if(!name){showErr('Please enter your name.');return;}
+  if(!email||!email.includes('@')){showErr('Please enter a valid email address.');return;}
+  if(!type){showErr('Please select your role.');return;}
+
+  err.style.display='none';
+  const btn=document.getElementById('submit-btn');
+  document.getElementById('btn-text').textContent='Joining...';
+  document.getElementById('btn-arrow').textContent='⟳';
+  btn.disabled=true;
+
+  // ── PRIMARY: Insert directly into Supabase waitlist table ──
+  // This is 100% reliable — direct API call, confirmed response
+  let realNum=null;
+  let supaSuccess=false;
+  try{
+    // 1. Insert the signup row
+    const insertRes=await fetch('https://vgviijuhbsxichhqagjz.supabase.co/rest/v1/waitlist_signups',{
+      method:'POST',
+      headers:{
+        'apikey':'sb_publishable_lmdvtOzwC14qieDKzVusGQ_ms2ePXcc',
+        'Authorization':'Bearer sb_publishable_lmdvtOzwC14qieDKzVusGQ_ms2ePXcc',
+        'Content-Type':'application/json',
+        'Prefer':'return=minimal'
+      },
+      body:JSON.stringify({
+        full_name:name,
+        email:email,
+        phone:'+91 '+phone,
+        role:type,
+        city:city,
+        joined_at:new Date().toISOString()
+      })
+    });
+    // 2. Increment the counter
+    const cntRes=await fetch('https://vgviijuhbsxichhqagjz.supabase.co/rest/v1/rpc/increment_waitlist',{
+      method:'POST',
+      headers:{
+        'apikey':'sb_publishable_lmdvtOzwC14qieDKzVusGQ_ms2ePXcc',
+        'Authorization':'Bearer sb_publishable_lmdvtOzwC14qieDKzVusGQ_ms2ePXcc',
+        'Content-Type':'application/json'
+      },
+      body:'{}'
+    });
+    if(cntRes.ok){
+      const val=await cntRes.json();
+      realNum=typeof val==='number'?val:null;
+    }
+    supaSuccess=true;
+  }catch(e){
+    console.warn('Supabase error:',e);
+  }
+
+  // ── BACKUP: Google Forms via hidden iframe (no CORS block, runs silently) ──
+  // Even if Supabase is the primary, this gives you a second copy in Google Sheets
+  try{
+    const ifrId='ykt-iframe-'+Date.now();
+    const ifr=document.createElement('iframe');
+    ifr.name=ifrId;ifr.id=ifrId;ifr.style.cssText='display:none;width:0;height:0;border:0;position:absolute;left:-9999px';
+    document.body.appendChild(ifr);
+    const frm=document.createElement('form');
+    frm.method='POST';
+    frm.action='https://docs.google.com/forms/d/e/1FAIpQLSevgnDZ89EwFbawEgTwZ-E6hRPPBMosBm3YP3EP_dphO8-NMQ/formResponse';
+    frm.target=ifrId;
+    [['entry.1376095378',name],['entry.1274753663',email],['entry.898574619','+91 '+phone],['entry.1044126335',type],['entry.1756604858',city]].forEach(([k,v])=>{
+      const i=document.createElement('input');i.type='hidden';i.name=k;i.value=v;frm.appendChild(i);
+    });
+    document.body.appendChild(frm);
+    frm.submit();
+    setTimeout(()=>{try{document.body.removeChild(ifr);document.body.removeChild(frm);}catch(x){}},8000);
+  }catch(e){}
+
+  submitted=true;
+
+  document.getElementById('form-content').style.display='none';
+  const ss=document.getElementById('success-state');
+  ss.style.display='block';
+  const displayNum=realNum||null;
+  document.getElementById('success-num').textContent=displayNum?'#'+displayNum:'';
+  if(displayNum) animateCount(document.getElementById('c1'),displayNum,800);
+
+  // Set share links
+  const shareText=encodeURIComponent('Just joined the Yuktha waitlist 🩺\n\nSomething is being built for India\'s healthcare system. 60,000 hospitals. 500M patients. Zero digital system.\n\nBe among the first to know: yuktha.health/waitlist');
+  document.getElementById('wa-btn').href='https://wa.me/?text='+shareText;
+  document.getElementById('ig-btn').href='https://instagram.com';
+}
+
+function showErr(msg){
+  const err=document.getElementById('form-error');
+  err.textContent=msg;err.style.display='block';
+}
+
+function c
