@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yuktha — Join the Waitlist</title>
+<meta name="description" content="Something is being built for India's healthcare. 60,000 hospitals. 500M patients. Zero system. We're fixing this.">
+<meta property="og:title" content="Yuktha — Join the Waitlist">
+<meta property="og:description" content="One QR code. Any doctor. Any emergency. Any time. Be among the first.">
+<meta property="og:image" content="https://yuktha.health/og.png">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --teal:#02B69A;
+  --teal2:#00D4AA;
+  --teal-d:#018A75;
+  --ink:#020810;
+  --ink2:#060F1C;
+  --ink3:#0C1928;
+  --white:#F0F8FF;
+  --slate:#8FA3B8;
+  --slate2:#C2D4E4;
+  --red:#E84040;
+  --amber:#F0A020;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--ink);
+  color:var(--white);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* ── BACKGROUND ── */
+.bg-layer{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 60% 50% at 15% 0%, rgba(2,182,154,.09) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 85% 100%, rgba(2,182,154,.06) 0%, transparent 50%);
+}
+.grid-layer{display:none}
+
+/* ── NOISE ── */
+.noise{
+  position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.015;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ── LAYOUT ── */
+.page{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column}
+
+/* ── NAV ── */
+nav{
+  padding:20px 32px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid rgba(2,182,154,.08);
+  backdrop-filter:blur(10px);
+  background:rgba(2,8,16,.4);
+  position:sticky;top:0;z-index:100;
+}
+.logo{
+  display:flex;align-items:baseline;gap:0;
+  text-decoration:none;
+}
+.nav-pill{
+  font-size:11px;font-weight:600;letter-spacing:.08em;
+  color:var(--teal);background:rgba(2,182,154,.1);
+  border:1px solid rgba(2,182,154,.25);
+  border-radius:20px;padding:5px 14px;
+  display:flex;align-items:center;gap:6px;
+}
+.pulse{width:6px;height:6px;border-radius:50%;background:var(--teal);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.8)}}
+@keyframes pop{0%{transform:scale(0);opacity:0}70%{transform:scale(1.3)}100%{transform:scale(1);opacity:1}}
+
+/* ── HERO ── */
+.hero{
+  flex:1;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;padding:60px 20px 40px;text-align:center;
+}
+.hero-eyebrow{
+  font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--teal);margin-bottom:20px;
+  display:flex;align-items:center;gap:8px;
+}
+.hero-eyebrow::before,.hero-eyebrow::after{
+  content:'';display:block;width:32px;height:1px;background:rgba(2,182,154,.4);
+}
+.hero-headline{
+  font-family:'Playfair Display',Georgia,serif;
+  font-size:clamp(36px,6vw,72px);
+  font-weight:700;line-height:1.05;
+  color:#FFFFFF;
+  margin-bottom:12px;
+  max-width:800px;
+}
+.hero-headline .accent{color:var(--teal);font-style:italic}
+.hero-sub{
+  font-size:clamp(14px,2vw,17px);
+  color:#A0B4C8;
+  line-height:1.7;
+  max-width:520px;
+  margin:0 auto 40px;
+}
+.hero-sub strong{color:var(--slate2)}
+
+/* ── COUNTER ── */
+.counter-row{
+  display:flex;gap:28px;margin-bottom:40px;
+  flex-wrap:wrap;justify-content:center;
+}
+.counter-item{text-align:center}
+.counter-num{
+  font-family:'DM Mono',monospace;
+  font-size:clamp(22px,4vw,36px);
+  font-weight:500;color:var(--teal);
+  letter-spacing:-1px;line-height:1;
+}
+.counter-label{font-size:10px;color:var(--slate);letter-spacing:.08em;text-transform:uppercase;margin-top:4px}
+.counter-div{width:1px;background:rgba(2,182,154,.2);align-self:stretch}
+
+/* ── FORM ── */
+.form-wrap{
+  width:100%;max-width:480px;margin:0 auto;
+}
+.form-card{
+  background:rgba(4,10,20,.95);
+  border:1px solid rgba(2,182,154,.18);
+  border-radius:20px;
+  padding:28px;
+  backdrop-filter:blur(20px);
+  position:relative;overflow:hidden;
+}
+.form-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--teal),transparent);
+}
+.form-title{
+  font-size:16px;font-weight:600;color:var(--white);
+  margin-bottom:4px;
+}
+.form-sub{font-size:12px;color:var(--slate);margin-bottom:20px;line-height:1.5}
+
+.input-row{display:flex;flex-direction:column;gap:10px;margin-bottom:10px}
+.input-group{position:relative}
+.input-label{
+  font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--slate);margin-bottom:6px;display:block;
+}
+input,select{
+  width:100%;
+  background:rgba(2,8,16,.6);
+  border:1px solid rgba(2,182,154,.15);
+  border-radius:10px;
+  padding:12px 16px;
+  font-family:'DM Sans',sans-serif;
+  font-size:13px;
+  color:var(--white);
+  outline:none;
+  transition:border-color .2s,background .2s;
+  -webkit-appearance:none;
+}
+input::placeholder{color:var(--slate)}
+input:focus,select:focus{
+  border-color:rgba(2,182,154,.5);
+  background:rgba(2,182,154,.04);
+}
+select{
+  color:var(--slate);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238FA3B8' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 14px center;
+  padding-right:36px;
+  cursor:pointer;
+}
+select option{background:#0C1928;color:var(--white)}
+
+.phone-row{display:flex;gap:8px}
+.phone-prefix{
+  width:72px;flex-shrink:0;
+  background:rgba(2,8,16,.6);
+  border:1px solid rgba(2,182,154,.15);
+  border-radius:10px;
+  padding:12px 10px;
+  font-family:'DM Mono',monospace;
+  font-size:12px;color:var(--slate);
+  display:flex;align-items:center;justify-content:center;
+  letter-spacing:.05em;
+}
+
+.submit-btn{
+  width:100%;padding:14px;
+  border-radius:12px;
+  background:var(--teal);
+  color:var(--ink);
+  border:none;
+  font-family:'DM Sans',sans-serif;
+  font-size:14px;font-weight:700;
+  cursor:pointer;
+  transition:all .2s;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  margin-top:14px;
+  position:relative;overflow:hidden;
+}
+.submit-btn::after{
+  content:'';position:absolute;inset:0;
+  background:rgba(255,255,255,0);transition:background .2s;
+}
+.submit-btn:hover::after{background:rgba(255,255,255,.08)}
+.submit-btn:active{transform:scale(.99)}
+.submit-btn:disabled{opacity:.6;cursor:not-allowed}
+.btn-arrow{transition:transform .2s}
+.submit-btn:hover .btn-arrow{transform:translateX(4px)}
+
+.form-note{
+  text-align:center;margin-top:12px;
+  font-size:11px;color:var(--slate);line-height:1.5;
+}
+.form-note a{color:var(--teal);text-decoration:none}
+
+/* ── SUCCESS STATE ── */
+.success-state{
+  display:none;text-align:center;padding:20px 0;
+}
+.success-icon{
+  width:60px;height:60px;border-radius:50%;
+  background:rgba(2,182,154,.15);border:2px solid var(--teal);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 16px;font-size:24px;
+}
+.success-title{font-size:18px;font-weight:600;color:var(--white);margin-bottom:6px}
+.success-sub{font-size:13px;color:var(--slate);line-height:1.6}
+.success-num{
+  font-family:'DM Mono',monospace;font-size:28px;font-weight:500;
+  color:var(--teal);margin:14px 0 4px;
+}
+
+/* ── SOCIAL SHARE ── */
+.share-section{
+  margin-top:24px;padding-top:20px;
+  border-top:1px solid rgba(2,182,154,.1);
+}
+.share-label{font-size:11px;color:var(--slate);margin-bottom:10px;text-align:center;letter-spacing:.06em;text-transform:uppercase}
+.share-btns{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.share-btn{
+  display:flex;align-items:center;gap:6px;
+  padding:8px 16px;border-radius:8px;
+  font-size:12px;font-weight:600;
+  cursor:pointer;border:1px solid;transition:all .2s;
+  text-decoration:none;
+}
+.share-btn:hover{transform:translateY(-1px)}
+.share-wa{background:rgba(37,211,102,.1);border-color:rgba(37,211,102,.3);color:#25D366}
+.share-ig{background:rgba(225,48,108,.1);border-color:rgba(225,48,108,.3);color:#E1306C}
+.share-cp{background:rgba(2,182,154,.1);border-color:rgba(2,182,154,.3);color:var(--teal)}
+
+/* ── STATS STRIP ── */
+.stats-strip{
+  display:flex;gap:0;
+  border-top:1px solid rgba(2,182,154,.1);
+  border-bottom:1px solid rgba(2,182,154,.1);
+  flex-wrap:wrap;
+}
+.stat-block{
+  flex:1;min-width:160px;
+  padding:20px 24px;
+  text-align:center;
+  border-right:1px solid rgba(2,182,154,.08);
+}
+.stat-block:last-child{border-right:none}
+.stat-val{
+  font-family:'DM Mono',monospace;
+  font-size:28px;font-weight:500;
+  color:#02B69A;line-height:1;margin-bottom:4px;
+}
+.stat-lbl{font-size:11px;color:var(--slate);line-height:1.4}
+
+/* ── FEATURES ── */
+
+
+/* ── TESTIMONIALS / SOCIAL PROOF ── */
+.proof{
+  padding:40px 20px;max-width:700px;margin:0 auto;width:100%;text-align:center;
+}
+.proof-label{
+  font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--slate);margin-bottom:20px;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+}
+.quotes{display:flex;flex-direction:column;gap:12px}
+.quote{
+  background:rgba(4,10,20,.85);
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:12px;padding:16px 20px;
+  text-align:left;
+}
+.quote-text{font-size:13px;color:var(--slate2);line-height:1.7;font-style:italic;margin-bottom:10px}
+.quote-author{display:flex;align-items:center;gap:8px}
+.quote-avatar{
+  width:28px;height:28px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:700;color:#000;
+  flex-shrink:0;
+}
+.quote-name{font-size:11px;font-weight:600;color:var(--white)}
+.quote-role{font-size:10px;color:var(--slate)}
+
+/* ── BOTTOM CTA ── */
+.bottom-cta{
+  padding:60px 20px;text-align:center;
+  border-top:1px solid rgba(2,182,154,.1);
+  background:rgba(2,8,16,.3);
+}
+.bottom-cta-headline{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(22px,4vw,40px);
+  font-weight:700;color:var(--white);
+  margin-bottom:10px;line-height:1.2;
+}
+.bottom-cta-sub{font-size:13px;color:var(--slate);margin-bottom:24px;line-height:1.6}
+.cta-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--teal);color:var(--ink);
+  padding:14px 32px;border-radius:12px;
+  font-size:14px;font-weight:700;
+  text-decoration:none;border:none;cursor:pointer;
+  font-family:'DM Sans',sans-serif;
+  transition:all .2s;
+}
+.cta-btn:hover{background:var(--teal2);transform:translateY(-1px)}
+
+/* ── FOOTER ── */
+footer{
+  padding:24px 32px;
+  border-top:1px solid rgba(2,182,154,.08);
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:12px;
+}
+.footer-logo{display:flex;align-items:baseline;gap:0}
+.footer-text{font-size:11px;color:var(--slate)}
+.footer-tagline{font-size:11px;color:var(--slate);letter-spacing:.06em}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.fade-up{animation:fadeUp .6s ease forwards;opacity:0}
+.fade-up:nth-child(1){animation-delay:.1s}
+.fade-up:nth-child(2){animation-delay:.2s}
+.fade-up:nth-child(3){animation-delay:.3s}
+.fade-up:nth-child(4){animation-delay:.4s}
+.fade-up:nth-child(5){animation-delay:.5s}
+
+/* ── TICKER ── */
+.ticker-wrap{
+  overflow:hidden;
+  border-top:1px solid rgba(2,182,154,.08);
+  border-bottom:1px solid rgba(2,182,154,.08);
+  padding:10px 0;background:rgba(2,8,16,.8);
+}
+.ticker{
+  display:flex;gap:0;
+  animation:ticker 30s linear infinite;
+  white-space:nowrap;
+}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.tick-item{
+  padding:0 32px;font-size:11px;color:var(--slate);
+  display:flex;align-items:center;gap:8px;
+}
+.tick-dot{width:4px;height:4px;border-radius:50%;background:var(--teal);flex-shrink:0}
+
+/* ── RESPONSIVE ── */
+@media(max-width:600px){
+  nav{padding:16px 20px}
+  .hero{padding:40px 16px 32px}
+  .features,.proof{padding:40px 16px}
+  footer{padding:20px;flex-direction:column;text-align:center}
+  .counter-div{display:none}
+  .stats-strip{flex-direction:column}
+  .stat-block{border-right:none;border-bottom:1px solid rgba(2,182,154,.08)}
+  .stat-block:last-child{border-bottom:none}
+}
+</style>
+</head>
+<body>
+
+  <div>
+    <div class="bg-layer"></div>
+<div class="grid-layer"></div>
+<div class="noise"></div>
+
+<div class="page">
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo" style="display:flex;align-items:baseline;gap:0;text-decoration:none"><span style="font-family:'Playfair Display',Georgia,serif;font-size:20px;font-weight:900;font-style:italic;color:#02B69A;letter-spacing:-1px;line-height:1">yuktha</span><span style="font-family:'Playfair Display',Georgia,serif;font-size:20px;font-weight:900;font-style:normal;color:#00D4AA;line-height:1">.</span></a>
+  <div class="nav-pill"><div class="pulse"></div>Waitlist open</div>
+</nav>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span class="tick-item"><div class="tick-dot"></div>60,000+ hospitals. Zero digital system.</span>
+    <span class="tick-item"><div class="tick-dot"></div>500 million patients. No digital records.</span>
+    <span class="tick-item"><div class="tick-dot"></div>60 minutes. That's all the time a doctor has.</span>
+    <span class="tick-item"><div class="tick-dot"></div>Less than 3% of Indians have digital health records</span>
+    <span class="tick-item"><div class="tick-dot"></div>Something is being built. Stay close.</span>
+    <span class="tick-item"><div class="tick-dot"></div>Built for Bharat — not just Bangalore</span>
+    <span class="tick-item"><div class="tick-dot"></div>The problem is real. The solution is coming.</span>
+    <span class="tick-item"><div class="tick-dot"></div>60,000+ hospitals. Zero digital system.</span>
+    <span class="tick-item"><div class="tick-dot"></div>500 million patients. No digital records.</span>
+    <span class="tick-item"><div class="tick-dot"></div>60 minutes. That's all the time a doctor has.</span>
+    <span class="tick-item"><div class="tick-dot"></div>Less than 3% of Indians have digital health records</span>
+    <span class="tick-item"><div class="tick-dot"></div>Something is being built. Stay close.</span>
+    <span class="tick-item"><div class="tick-dot"></div>Built for Bharat — not just Bangalore</span>
+    <span class="tick-item"><div class="tick-dot"></div>The problem is real. The solution is coming.</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow fade-up">Something is being built</div>
+  <h1 class="hero-headline fade-up">
+    India's healthcare system<br>needs a <span class="accent">new layer.</span>
+  </h1>
+  <p class="hero-sub fade-up">
+    Every year thousands of Indians die in emergencies not because help wasn't available —
+    but because <strong>the doctor didn't have the information in time.</strong>
+    <br><br>We are building something about this.<br>Join the waitlist to be among the first to know.
+  </p>
+
+  <div class="counter-row fade-up">
+    <div class="counter-item">
+      <div class="counter-num" id="c1">0</div>
+      <div class="counter-label">on the waitlist</div>
+    </div>
+    <div class="counter-div"></div>
+    <div class="counter-item">
+      <div class="counter-num">60K+</div>
+      <div class="counter-label">hospitals, no system</div>
+    </div>
+    <div class="counter-div"></div>
+    <div class="counter-item">
+      <div class="counter-num">500M</div>
+      <div class="counter-label">patients affected</div>
+    </div>
+    <div class="counter-div"></div>
+    <div class="counter-item">
+      <div class="counter-num">60</div>
+      <div class="counter-label">minutes to save a life</div>
+    </div>
+  </div>
+
+  <!-- FORM -->
+  <div class="form-wrap fade-up">
+    <div class="form-card" id="form-card">
+      <div id="form-content">
+        <div class="form-title">Be among the first.</div>
+        <div class="form-sub">We're not ready to show everything yet. But when we launch, waitlist members get access first. Takes 30 seconds.</div>
+        <div class="input-row">
+          <div class="input-group">
+            <label class="input-label">Full name</label>
+            <input type="text" id="inp-name" placeholder="Your full name" autocomplete="name">
+          </div>
+          <div class="input-group">
+            <label class="input-label">Email address</label>
+            <input type="email" id="inp-email" placeholder="you@example.com" autocomplete="email">
+          </div>
+          <div class="input-group">
+            <label class="input-label">Phone number</label>
+            <div class="phone-row">
+              <div class="phone-prefix">+91</div>
+              <input type="tel" id="inp-phone" placeholder="98765 43210" autocomplete="tel" style="flex:1">
+            </div>
+          </div>
+          <div class="input-group">
+            <label class="input-label">I am a</label>
+            <select id="inp-type">
+              <option value="" disabled selected>Select your role</option>
+              <option value="patient">Patient / Family member</option>
+              <option value="doctor">Doctor</option>
+              <option value="hospital">Hospital owner / Admin</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="input-group" id="city-group">
+            <label class="input-label">City</label>
+            <input type="text" id="inp-city" placeholder="Hyderabad, Warangal, Nizamabad...">
+          </div>
+        </div>
+        <div id="form-error" style="display:none;background:rgba(232,64,64,.1);border:1px solid rgba(232,64,64,.3);border-radius:8px;padding:10px 14px;font-size:12px;color:#E84040;margin-bottom:10px"></div>
+        <button class="submit-btn" id="submit-btn" onclick="submitForm()">
+          <span id="btn-text">Join the waitlist</span>
+          <span class="btn-arrow" id="btn-arrow">→</span>
+        </button>
+        <div class="form-note">
+          No spam. No credit card. We'll reach out before launch.<br>
+          By joining you agree to our <a href="#">Privacy Policy</a>.
+        </div>
+
+      </div>
+
+      <!-- SUCCESS STATE -->
+      <div class="success-state" id="success-state">
+
+        <!-- Confetti -->
+        <div style="display:flex;justify-content:center;gap:5px;margin-bottom:20px">
+          <div style="width:8px;height:8px;border-radius:50%;background:var(--teal);animation:pop .4s ease both"></div>
+          <div style="width:5px;height:5px;border-radius:50%;background:var(--amber);animation:pop .5s ease both;margin-top:5px"></div>
+          <div style="width:7px;height:7px;border-radius:50%;background:var(--teal2);animation:pop .35s ease both"></div>
+          <div style="width:4px;height:4px;border-radius:50%;background:#fff;animation:pop .6s ease both;margin-top:6px"></div>
+          <div style="width:6px;height:6px;border-radius:50%;background:var(--teal);animation:pop .45s ease both;margin-top:2px"></div>
+        </div>
+
+        <div style="text-align:center;margin-bottom:20px">
+          <div style="font-size:18px;font-weight:700;color:#fff;margin-bottom:5px">You're in. 🎉</div>
+          <div style="font-size:12px;color:var(--slate);line-height:1.7">You're here before the world knows.<br>Share your spot.</div>
+        </div>
+
+        <!-- INSTAGRAM STORY CARD -->
+        <div style="margin-bottom:18px">
+          <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--slate);margin-bottom:10px;text-align:center">Your story card — screenshot & post 📲</div>
+
+          <!-- Story format: 9:16 ratio card -->
+          <div id="story-card" style="
+            width:100%;
+            aspect-ratio:9/16;
+            max-height:480px;
+            background:#020810;
+            border-radius:20px;
+            border:1px solid rgba(2,182,154,.25);
+            overflow:hidden;
+            position:relative;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            justify-content:center;
+            padding:28px 24px;
+          ">
+            <!-- Background glows -->
+            <div style="position:absolute;width:300px;height:300px;border-radius:50%;background:rgba(2,182,154,.12);filter:blur(60px);top:-80px;left:50%;transform:translateX(-50%);pointer-events:none"></div>
+            <div style="position:absolute;width:200px;height:200px;border-radius:50%;background:rgba(2,182,154,.07);filter:blur(50px);bottom:-60px;right:-40px;pointer-events:none"></div>
+            <!-- Dot grid texture -->
+            <div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(2,182,154,.06) 1px,transparent 1px);background-size:24px 24px;pointer-events:none"></div>
+
+            <!-- Inner content -->
+            <div style="position:relative;z-index:1;width:100%;display:flex;flex-direction:column;align-items:center;text-align:center;gap:0">
+
+              <!-- Logo -->
+              <div style="display:flex;align-items:baseline;gap:0;margin-bottom:4px">
+                <span style="font-family:'Playfair Display',Georgia,serif;font-size:22px;font-weight:900;font-style:italic;color:#02B69A;letter-spacing:-1px;line-height:1">yuktha</span><span style="font-family:'Playfair Display',Georgia,serif;font-size:22px;font-weight:900;font-style:normal;color:#00D4AA;line-height:1">.</span>
+              </div>
+              <div style="font-size:7px;color:rgba(2,182,154,.45);letter-spacing:.2em;text-transform:uppercase;margin-bottom:22px">Health connected. Care protected.</div>
+
+              <!-- Divider -->
+              <div style="width:32px;height:1px;background:rgba(2,182,154,.3);margin-bottom:22px"></div>
+
+              <!-- Badge -->
+              <div style="font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--slate);margin-bottom:8px">I joined the waitlist as</div>
+              <div id="story-num" style="font-family:'DM Mono',monospace;font-size:72px;font-weight:700;color:var(--teal);letter-spacing:-3px;line-height:1;margin-bottom:6px">#1</div>
+              <div style="font-size:10px;color:rgba(255,255,255,.35);margin-bottom:24px">on the Yuktha waitlist</div>
+
+              <!-- Divider -->
+              <div style="width:32px;height:1px;background:rgba(255,255,255,.06);margin-bottom:22px"></div>
+
+              <!-- CTA -->
+              <div style="background:rgba(2,182,154,.1);border:1px solid rgba(2,182,154,.2);border-radius:20px;padding:8px 18px;font-size:10px;color:var(--teal);font-weight:600;letter-spacing:.04em;margin-bottom:8px">
+                join-yuktha-waitlist.vercel.app
+              </div>
+              <div style="font-size:9px;color:rgba(255,255,255,.2)">Something is being built for India's healthcare.</div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Share buttons -->
+        <div style="display:flex;gap:8px;margin-bottom:16px">
+          <!-- WhatsApp — shares image + text -->
+          <button onclick="shareWhatsApp()" style="
+            flex:1;display:flex;align-items:center;justify-content:center;gap:7px;
+            background:rgba(37,211,102,.1);border:1px solid rgba(37,211,102,.25);
+            border-radius:10px;padding:11px;
+            font-size:12px;font-weight:600;color:#25D366;
+            cursor:pointer;font-family:'DM Sans',sans-serif;
+          " id="wa-share-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            <span id="wa-share-text">Share on WhatsApp</span>
+          </button>
+          <!-- Instagram — downloads image -->
+          <button onclick="downloadCard()" style="
+            flex:1;display:flex;align-items:center;justify-content:center;gap:7px;
+            background:linear-gradient(135deg,rgba(225,48,108,.1),rgba(253,153,52,.1));
+            border:1px solid rgba(225,48,108,.25);
+            border-radius:10px;padding:11px;
+            font-size:12px;font-weight:600;
+            color:#E1306C;
+            cursor:pointer;font-family:'DM Sans',sans-serif;
+          " id="ig-dl-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span id="ig-dl-text">Download for Instagram</span>
+          </button>
+        </div>
+
+        <!-- Hint -->
+        <div style="text-align:center;font-size:10px;color:rgba(255,255,255,.15);margin-bottom:14px">
+          📲 Download → post as your Instagram story · Share on WhatsApp with the image
+        </div>
+
+        <!-- What next -->
+        <div style="background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:12px;padding:14px">
+          <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--slate);margin-bottom:10px">What happens next</div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;gap:10px;align-items:center">
+              <div style="width:18px;height:18px;border-radius:50%;background:rgba(2,182,154,.15);border:1px solid rgba(2,182,154,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:9px;font-weight:700;color:var(--teal)">1</div>
+              <div style="font-size:11px;color:var(--slate2)">Email before we launch publicly</div>
+            </div>
+            <div style="display:flex;gap:10px;align-items:center">
+              <div style="width:18px;height:18px;border-radius:50%;background:rgba(2,182,154,.15);border:1px solid rgba(2,182,154,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:9px;font-weight:700;color:var(--teal)">2</div>
+              <div style="font-size:11px;color:var(--slate2)">Priority onboarding when we launch</div>
+            </div>
+            <div style="display:flex;gap:10px;align-items:center">
+              <div style="width:18px;height:18px;border-radius:50%;background:rgba(2,182,154,.15);border:1px solid rgba(2,182,154,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:9px;font-weight:700;color:var(--teal)">3</div>
+              <div style="font-size:11px;color:var(--slate2)">Follow <strong style="color:#fff">@yuktha.health</strong> on Instagram</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-strip" style="background:rgba(4,10,20,.6)">
+  <div class="stat-block">
+    <div class="stat-val">60K+</div>
+    <div class="stat-lbl">Private hospitals in India<br>with zero digital system</div>
+  </div>
+  <div class="stat-block">
+    <div class="stat-val">500M</div>
+    <div class="stat-lbl">Patients with no<br>digital medical records</div>
+  </div>
+  <div class="stat-block">
+    <div class="stat-val">&lt;3%</div>
+    <div class="stat-lbl">Indians can access their<br>complete health records digitally</div>
+  </div>
+  <div class="stat-block">
+    <div class="stat-val">22</div>
+    <div class="stat-lbl">Indian languages supported<br>by Yuktha AI</div>
+  </div>
+</div>
+
+
+<!-- BOTTOM CTA -->
+<section class="bottom-cta">
+  <div class="bottom-cta-headline">Don't be the person who was late.</div>
+  <div class="bottom-cta-sub">Something is being built for India's healthcare system.<br>The people on this list will be the first to see it.<br>The list is growing. Every day.</div>
+  <a href="#" class="cta-btn" onclick="document.querySelector('.form-card').scrollIntoView({behavior:'smooth'});return false">
+    Join the waitlist → 
+  </a>
+  <div style="margin-top:14px;font-size:11px;color:var(--slate)">Takes 30 seconds. No credit card required.</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo" style="display:flex;align-items:baseline;gap:0"><span style="font-family:'Playfair Display',Georgia,serif;font-size:15px;font-weight:900;font-style:italic;color:#02B69A;letter-spacing:-1px;line-height:1">yuktha</span><span style="font-family:'Playfair Display',Georgia,serif;font-size:15px;font-weight:900;font-style:normal;color:#00D4AA;line-height:1">.</span></div>
+  <div class="footer-text">yuktha.health@gmail.com · +91 88964 23456</div>
+  <div class="footer-tagline">Health connected. Care protected.</div>
+</footer>
+
+</div>
+
+<script>
+// Animated counter
+function animateCount(el,target,duration,prefix='',suffix=''){
+  let start=0,step=target/60;
+  const id=setInterval(()=>{
+    start+=step;
+    if(start>=target){start=target;clearInterval(id);}
+    el.textContent=prefix+Math.round(start).toLocaleString()+suffix;
+  },duration/60);
+}
+// ── SUPABASE GLOBAL COUNTER ──
+const SB_URL = 'https://vgviijuhbsxichhqagjz.supabase.co';
+const SB_KEY = 'sb_publishable_lmdvtOzwC14qieDKzVusGQ_ms2ePXcc';
+
+async function getCount(){
+  try{
+    const r = await fetch(SB_URL+'/rest/v1/waitlist_count?id=eq.1&select=count',{
+      headers:{
+        'apikey': SB_KEY,
+        'Authorization': 'Bearer '+SB_KEY
+      }
+    });
+    const d = await r.json();
+    return d[0]?.count || 0;
+  } catch(e){ return 0; }
+}
+
+async function incrementCount(){
+  // Atomic increment using Supabase RPC — no race conditions
+  try{
+    const r = await fetch(SB_URL+'/rest/v1/rpc/increment_waitlist',{
+      method:'POST',
+      headers:{
+        'apikey': SB_KEY,
+        'Authorization': 'Bearer '+SB_KEY,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({})
+    });
+    if(r.ok){
+      const d = await r.json();
+      return d || 1;
+    }
+  } catch(e){ console.warn('RPC increment failed, using fallback'); }
+
+  // Fallback: get + patch
+  try{
+    const current = await getCount();
+    const next = current + 1;
+    await fetch(SB_URL+'/rest/v1/waitlist_count?id=eq.1',{
+      method:'PATCH',
+      headers:{
+        'apikey': SB_KEY,
+        'Authorization': 'Bearer '+SB_KEY,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=representation'
+      },
+      body: JSON.stringify({ count: next })
+    });
+    return next;
+  } catch(e){ return 1; }
+}
+
+async function refreshCount(){
+  const count = await getCount();
+  const el = document.getElementById('c1');
+  const current = parseInt(el.textContent.replace(/,/g,'')) || 0;
+  if(count !== current){
+    animateCount(el, count, 600);
+  }
+}
+
+window.addEventListener('load',async()=>{
+  await refreshCount();
+  // Refresh every 5 seconds — same count on every device
+  setInterval(refreshCount, 5000);
+});
+
+// Form
+let submitted=false;
+async function submitForm(){
+  if(submitted)return;
+  const name=document.getElementById('inp-name').value.trim();
+  const email=document.getElementById('inp-email').value.trim();
+  const phone=document.getElementById('inp-phone').value.trim();
+  const type=document.getElementById('inp-type').value;
+  const city=document.getElementById('inp-city').value.trim();
+  const err=document.getElementById('form-error');
+
+  if(!name){showErr('Please enter your name.');return;}
+  if(!email||!email.includes('@')){showErr('Please enter a valid email address.');return;}
+  if(!type){showErr('Please select your role.');return;}
+
+  err.style.display='none';
+  const btn=document.getElementById('submit-btn');
+  document.getElementById('btn-text').textContent='Joining...';
+  document.getElementById('btn-arrow').textContent='⟳';
+  btn.disabled=true;
+
+  // Count managed by countapi — no local fake numbers
+
+  // Send to Google Forms → saves to Google Sheets
+  try{
+    const fd = new FormData();
+    fd.append('entry.1376095378', name);
+    fd.append('entry.1274753663', email);
+    fd.append('entry.898574619',  '+91 ' + phone);
+    fd.append('entry.1044126335', type);
+    fd.append('entry.1756604858', city);
+    await fetch('https://docs.google.com/forms/d/e/1FAIpQLSevgnDZ89EwFbawEgTwZ-E6hRPPBMosBm3YP3EP_dphO8-NMQ/formResponse', {
+      method: 'POST',
+      mode: 'no-cors',
+      body: fd
+    });
+    console.log('Saved to Google Sheets');
+  } catch(e) {
+    console.warn('Forms error:', e);
+  }
+
+  // Increment Supabase counter — global, real, shared
+  let realNum = 1;
+  try{
+    realNum = await incrementCount();
+  } catch(e){ realNum = 1; }
+  submitted=true;
+
+  document.getElementById('form-content').style.display='none';
+  const ss=document.getElementById('success-state');
+  ss.style.display='block';
+  const numStr = '#' + realNum;
+  // Update both the success number and the story card number
+  const sn = document.getElementById('success-num');
+  const storyN = document.getElementById('story-num');
+  if(sn) sn.textContent = numStr;
+  if(storyN) storyN.textContent = numStr;
+  animateCount(document.getElementById('c1'), realNum, 800);
+
+  // Set WhatsApp share
+  const waText = encodeURIComponent(`I just joined the Yuktha waitlist as ${numStr} 🩺\n\nYuktha is building something for India's healthcare system. 60,000 hospitals. 500M patients. Zero digital system.\n\nJoin the waitlist: join-yuktha-waitlist.vercel.app\n\n#Yuktha #Healthcare #India`);
+  document.getElementById('wa-btn').href = 'https://wa.me/?text=' + waText;
+
+  // Set share links
+  const waNum = document.getElementById('success-num').textContent;
+  const shareText=encodeURIComponent(`I just joined the Yuktha waitlist as ${waNum} 🩺\n\nYuktha is building something for India's healthcare system. 60,000 hospitals. 500M patients. Zero digital system.\n\nJoin the waitlist before it fills: join-yuktha-waitlist.vercel.app`);
+  document.getElementById('wa-btn').href='https://wa.me/?text='+shareText;
+}
+
+function showErr(msg){
+  const err=document.getElementById('form-error');
+  err.textContent=msg;err.style.display='block';
+}
+
+function copyLink(){
+  navigator.clipboard.writeText(window.location.href).then(()=>{
+    const btn=document.getElementById('copy-link-text');
+    if(btn){btn.textContent='Copied!';setTimeout(()=>btn.textContent='Copy link',2000);}
+  });
+}
+
+// ── Draw story card on Canvas — no external library, works everywhere ──
+function drawStoryCard(num){
+  const canvas = document.createElement('canvas');
+  // 1080x1920 = standard Instagram story size
+  canvas.width = 1080;
+  canvas.height = 1920;
+  const ctx = canvas.getContext('2d');
+
+  // Background
+  ctx.fillStyle = '#020810';
+  ctx.fillRect(0, 0, 1080, 1920);
+
+  // Teal glow
+  const glow = ctx.createRadialGradient(540, 600, 0, 540, 600, 600);
+  glow.addColorStop(0, 'rgba(2,182,154,0.18)');
+  glow.addColorStop(1, 'rgba(2,8,16,0)');
+  ctx.fillStyle = glow;
+  ctx.fillRect(0, 0, 1080, 1920);
+
+  // Dot grid texture
+  ctx.fillStyle = 'rgba(2,182,154,0.05)';
+  for(let x=0; x<1080; x+=40){
+    for(let y=0; y<1920; y+=40){
+      ctx.beginPath();
+      ctx.arc(x, y, 2, 0, Math.PI*2);
+      ctx.fill();
+    }
+  }
+
+  // Top border line
+  const topLine = ctx.createLinearGradient(0,0,1080,0);
+  topLine.addColorStop(0,'rgba(2,182,154,0)');
+  topLine.addColorStop(0.5,'rgba(2,182,154,0.8)');
+  topLine.addColorStop(1,'rgba(2,182,154,0)');
+  ctx.fillStyle = topLine;
+  ctx.fillRect(0, 0, 1080, 3);
+
+  // Logo — yuktha.
+  ctx.font = 'italic 900 80px Georgia, serif';
+  ctx.fillStyle = '#02B69A';
+  ctx.textAlign = 'center';
+  ctx.fillText('yuktha', 520, 320);
+  // Dot after yuktha
+  ctx.font = '900 80px Georgia, serif';
+  ctx.fillStyle = '#00D4AA';
+  const tw = ctx.measureText('yuktha').width;
+  ctx.fillText('.', 520 + tw/2 + 8, 320);
+
+  // Tagline
+  ctx.font = '400 28px Arial, sans-serif';
+  ctx.fillStyle = 'rgba(2,182,154,0.45)';
+  ctx.letterSpacing = '4px';
+  ctx.fillText('HEALTH CONNECTED. CARE PROTECTED.', 540, 390);
+  ctx.letterSpacing = '0px';
+
+  // Divider
+  ctx.strokeStyle = 'rgba(2,182,154,0.3)';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(440, 450);
+  ctx.lineTo(640, 450);
+  ctx.stroke();
+
+  // "I joined the waitlist as"
+  ctx.font = '500 36px Arial, sans-serif';
+  ctx.fillStyle = 'rgba(143,163,184,0.9)';
+  ctx.textAlign = 'center';
+  ctx.fillText('I joined the waitlist as', 540, 700);
+
+  // Big number
+  ctx.font = 'bold 220px monospace';
+  ctx.fillStyle = '#02B69A';
+  ctx.textAlign = 'center';
+  ctx.fillText(num, 540, 980);
+
+  // "on the Yuktha waitlist"
+  ctx.font = '400 34px Arial, sans-serif';
+  ctx.fillStyle = 'rgba(143,163,184,0.6)';
+  ctx.fillText('on the Yuktha waitlist', 540, 1080);
+
+  // Divider 2
+  ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(340, 1160);
+  ctx.lineTo(740, 1160);
+  ctx.stroke();
+
+  // URL pill background
+  ctx.fillStyle = 'rgba(2,182,154,0.1)';
+  roundRect(ctx, 240, 1210, 600, 70, 35);
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(2,182,154,0.2)';
+  ctx.lineWidth = 1.5;
+  roundRect(ctx, 240, 1210, 600, 70, 35);
+  ctx.stroke();
+
+  // URL text
+  ctx.font = '500 28px Arial, sans-serif';
+  ctx.fillStyle = '#02B69A';
+  ctx.textAlign = 'center';
+  ctx.fillText('join-yuktha-waitlist.vercel.app', 540, 1255);
+
+  // Bottom tagline
+  ctx.font = '400 26px Arial, sans-serif';
+  ctx.fillStyle = 'rgba(255,255,255,0.2)';
+  ctx.fillText('Something is being built for India\'s healthcare.', 540, 1800);
+
+  return canvas;
+}
+
+function roundRect(ctx, x, y, w, h, r){
+  ctx.beginPath();
+  ctx.moveTo(x+r, y);
+  ctx.lineTo(x+w-r, y);
+  ctx.quadraticCurveTo(x+w, y, x+w, y+r);
+  ctx.lineTo(x+w, y+h-r);
+  ctx.quadraticCurveTo(x+w, y+h, x+w-r, y+h);
+  ctx.lineTo(x+r, y+h);
+  ctx.quadraticCurveTo(x, y+h, x, y+h-r);
+  ctx.lineTo(x, y+r);
+  ctx.quadraticCurveTo(x, y, x+r, y);
+  ctx.closePath();
+}
+
+// Download card as image for Instagram
+function downloadCard(){
+  const btn = document.getElementById('ig-dl-btn');
+  const txt = document.getElementById('ig-dl-text');
+  const num = document.getElementById('story-num')?.textContent || '#1';
+
+  txt.textContent = 'Generating...';
+  btn.disabled = true;
+
+  try{
+    const canvas = drawStoryCard(num);
+    const link = document.createElement('a');
+    link.download = 'yuktha-waitlist-' + num.replace('#','') + '.png';
+    link.href = canvas.toDataURL('image/png');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    txt.textContent = 'Downloaded ✓';
+    setTimeout(()=>{ txt.textContent='Download for Instagram'; btn.disabled=false; }, 2500);
+  } catch(e){
+    console.error(e);
+    txt.textContent = 'Download for Instagram';
+    btn.disabled = false;
+    alert('Download failed: ' + e.message);
+  }
+}
+
+// Share on WhatsApp — image + text via Web Share API on mobile
+async function shareWhatsApp(){
+  const btn = document.getElementById('wa-share-btn');
+  const txt = document.getElementById('wa-share-text');
+  const num = document.getElementById('story-num')?.textContent || '#1';
+  const text = `I just joined the Yuktha waitlist as ${num} 🩺\n\nYuktha is building something for India's healthcare system. 60,000 hospitals. 500M patients. Zero digital system.\n\nJoin here: join-yuktha-waitlist.vercel.app\n\n#Yuktha #Healthcare #India`;
+
+  txt.textContent = 'Preparing...';
+  btn.disabled = true;
+
+  try{
+    const canvas = drawStoryCard(num);
+
+    // Mobile: Web Share API with image file
+    if(navigator.share && navigator.canShare){
+      canvas.toBlob(async(blob)=>{
+        const file = new File([blob], 'yuktha-waitlist.png', {type:'image/png'});
+        const shareData = { title:'I joined the Yuktha Waitlist', text, files:[file] };
+        if(navigator.canShare(shareData)){
+          await navigator.share(shareData);
+          txt.textContent = 'Share on WhatsApp';
+          btn.disabled = false;
+          return;
+        }
+        // Can't share files — share text + open WA
+        fallbackWA(text, canvas, btn, txt);
+      }, 'image/png');
+      return;
+    }
+
+    // Desktop fallback
+    fallbackWA(text, canvas, btn, txt);
+
+  } catch(e){
+    if(e.name !== 'AbortError') console.error(e);
+    txt.textContent = 'Share on WhatsApp';
+    btn.disabled = false;
+  }
+}
+
+function fallbackWA(text, canvas, btn, txt){
+  // Open WhatsApp with text
+  window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank');
+  // Download image so they can attach it
+  const link = document.createElement('a');
+  const num = document.getElementById('story-num')?.textContent || '1';
+  link.download = 'yuktha-waitlist-' + num.replace('#','') + '.png';
+  link.href = canvas.toDataURL('image/png');
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  txt.textContent = 'Share on WhatsApp';
+  btn.disabled = false;
+}
+
+// Enter key
+document.addEventListener('keydown',(e)=>{
+  if(e.key==='Enter'&&!submitted)submitForm();
+});
+</script>
+</body>
+</html>
